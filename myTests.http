@@ -1,0 +1,63 @@
+
+// USER FUNCTIONS
+
+//create profile
+POST http://localhost:5000/api/auth/register HTTP/1.1
+content-type: application/json
+
+{
+     "authId": "gdxT0S0hYKe8Dmual1ndjiRB5Ll1",
+      "username": "Johan",
+      "phone": "321-567-3423",
+      "membership": "User"
+}
+
+###
+
+//update profile
+PUT http://localhost:5000/api/users/gdxT0S0hYKe8Dmual1ndjiRB5Ll1 HTTP/1.1
+content-type: application/json
+
+{
+     "authId": "gdxT0S0hYKe8Dmual1ndjiRB5Ll1",
+      "username": "Nohan"
+}
+
+###
+
+// HOUSE FUNCTIONS
+
+//create house
+
+POST http://localhost:5000/api/houses/kCd8oHU8VIcdtzcCbg3ARydWeMl1 HTTP/1.1
+content-type: application/json
+
+{
+      "authId": "kCd8oHU8VIcdtzcCbg3ARydWeMl1",
+      "description": "This is my first house",
+      "address":"134 Palm Bay Road",
+      "zipCode": "32908"
+}
+
+###
+
+//get house
+
+GET http://localhost:5000/api/houses/kCd8oHU8VIcdtzcCbg3ARydWeMl1 HTTP/1.1
+
+###
+
+//update house
+PUT http://localhost:5000/api/houses/kCd8oHU8VIcdtzcCbg3ARydWeMl1 HTTP/1.1
+content-type: application/json
+
+{
+      "authId": "kCd8oHU8VIcdtzcCbg3ARydWeMl1",
+      "description": "This is my first house",
+      "address":"133 Palm Bay Road",
+      "zipCode": "32908",
+      "information":{
+            "poolDesc": "900 gallon pool"
+      }
+
+}
