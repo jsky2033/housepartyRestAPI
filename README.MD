@@ -15,3 +15,7 @@ Of course this can be bypassed by someone who has the user's uid and then uses t
 The posts and houses will be their own collection. This is because because we often will not need to retrieve the houses or posts for a user and can simply get the user data instead.
 
 There are specific pages which will need to have house/post data and it is cleaner and more efficient to simply get them when it is needed. 
+
+# Deployment
+
+Automatic deployment of the rest api application through heroku is now guranteed.
