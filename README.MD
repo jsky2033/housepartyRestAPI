@@ -19,3 +19,7 @@ There are specific pages which will need to have house/post data and it is clean
 # Deployment
 
 Automatic deployment of the rest api application through heroku is now guranteed.
+
+# Important notes
+
+1. When using routes, the '/:id' ensures that everything after / is treated like the id. As such, if /:id is used along routes, it is best to have something like '/userOps/getAll' so that confusion is avoided with the id. See the users route for an example.

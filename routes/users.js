@@ -37,4 +37,19 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("/userOps/getAll", async (req, res) => {
+  try {
+    //get user
+    const users = await User.find({});
+    const filtered_users = users.map((item) => {
+      return {
+        username: item.username,
+      };
+    });
+    res.status(200).json(filtered_users);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 module.exports = router;
