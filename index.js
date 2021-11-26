@@ -30,13 +30,13 @@ app.use(cors());
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const houseRoute = require("./routes/houses");
-// const postRoute = require("./routes/posts");
+const postRoute = require("./routes/posts");
 
 //using routes
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/houses", houseRoute);
-// app.use("/api/posts", postRoute);
+app.use("/api/posts", postRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);

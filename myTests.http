@@ -66,3 +66,49 @@ content-type: application/json
       }
 
 }
+
+###
+
+//POST FUNCTIONS
+
+//create post
+
+POST http://localhost:5000/api/posts/kCd8oHU8VIcdtzcCbg3ARydWeMl1 HTTP/1.1
+content-type: application/json
+
+{
+      "authId": "kCd8oHU8VIcdtzcCbg3ARydWeMl1",
+      "title": "New turltle",
+      "description": "We have some new turtles"
+}
+
+###
+
+//get post
+
+GET http://localhost:5000/api/posts/kCd8oHU8VIcdtzcCbg3ARydWeMl1 HTTP/1.1
+
+###
+
+//update post
+PUT http://localhost:5000/api/posts/kCd8oHU8VIcdtzcCbg3ARydWeMl1 HTTP/1.1
+content-type: application/json
+
+{
+      "postId": "61a02bccd52670e8aec982c5",
+      "authId": "kCd8oHU8VIcdtzcCbg3ARydWeMl1",
+      "title": "New Pangolin",
+      "description": "Hey everyone, the game is on Thursday and we have a Pangolin!"
+}
+
+###
+
+//delete post 
+
+DELETE http://localhost:5000/api/posts/kCd8oHU8VIcdtzcCbg3ARydWeMl1 HTTP/1.1
+content-type: application/json
+
+{
+      "postId": "61a02bccd52670e8aec982c5",
+      "authId": "kCd8oHU8VIcdtzcCbg3ARydWeMl1"
+}
