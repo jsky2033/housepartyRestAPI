@@ -69,6 +69,37 @@ content-type: application/json
 
 ###
 
+//add user to house
+
+PUT http://localhost:5000/api/houses/addUser/6199b3e741ec7decb28cd8c6 HTTP/1.1
+content-type: application/json
+
+{
+      "authId": "f66sKE5aidWldUY0e7sCXElw0tH3",
+      "dbId":"6199b3e741ec7decb28cd8c6"
+}
+
+###
+
+//get all housemates of house
+
+GET http://localhost:5000/api/houses/houseMates/O2lTRTw8lSbSSDvVmy481aF3ZDc2 HTTP/1.1
+
+###
+
+//get rid of housemate
+
+DELETE http://localhost:5000/api/houses/6199b3e741ec7decb28cd8c6 HTTP/1.1
+content-type: application/json
+
+{
+      "authId": "O2lTRTw8lSbSSDvVmy481aF3ZDc2",
+      "dbId":"6199b3e741ec7decb28cd8c6"
+
+}
+
+###
+
 //POST FUNCTIONS
 
 //create post

@@ -31,12 +31,14 @@ router.get("/:id", async (req, res) => {
       username: user.username,
       phone: user.phone,
       membership: user.membership,
+      dbId: user._id,
     });
   } catch (err) {
     res.status(500).json(err.message);
   }
 });
 
+//get all users
 router.get("/userOps/getAll", async (req, res) => {
   try {
     //get user
@@ -44,6 +46,7 @@ router.get("/userOps/getAll", async (req, res) => {
     const filtered_users = users.map((item) => {
       return {
         username: item.username,
+        dbId: item._id,
       };
     });
     res.status(200).json(filtered_users);

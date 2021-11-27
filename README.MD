@@ -19,6 +19,12 @@ The posts and houses will be their own collection. This is because because we of
 
 There are specific pages which will need to have house/post data and it is cleaner and more efficient to simply get them when it is needed. 
 
+# House Mates
+
+The reason that the housemates finder function sends back all the data for the users is because it would be highly inefficient for the frontend to get the data itself for every user.
+
+As such the 'in' function in mongoose that essentially gets all the documents with certain ids from another collection. Similar to the JOIN operation in SQL databases.
+
 # Deployment
 
 Automatic deployment of the rest api application through heroku is now guranteed.
