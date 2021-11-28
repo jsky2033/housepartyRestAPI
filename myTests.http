@@ -100,6 +100,13 @@ content-type: application/json
 
 ###
 
+//get overview of house data
+
+GET http://localhost:5000/api/houses/houseOverview/619bda48dbbc01cd49057793 HTTP/1.1
+
+
+###
+
 //POST FUNCTIONS
 
 //create post
@@ -118,6 +125,11 @@ content-type: application/json
 //get post
 
 GET http://localhost:5000/api/posts/kCd8oHU8VIcdtzcCbg3ARydWeMl1 HTTP/1.1
+
+###
+
+//get posts for other user
+GET http://localhost:5000/api/posts/blogOverview/619ff00d4caf61abcd2c3d38 HTTP/1.1
 
 ###
 

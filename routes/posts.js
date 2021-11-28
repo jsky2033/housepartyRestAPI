@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Post = require("../models/Post");
+const User = require("../models/User");
 
 //create a post
 router.post("/:id", async (req, res) => {
@@ -24,7 +25,7 @@ router.post("/:id", async (req, res) => {
   }
 });
 
-//get house information for user
+//get posts for current user
 router.get("/:id", async (req, res) => {
   try {
     //get posts if they exists
@@ -45,9 +46,30 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//update post information
+//get posts for other user
+router.get("/blogOverview/:dbId", async (req, res) => {
+  try {
+    //GET OWNER DATA
+    const owner = await User.findById(req.params.dbId);
+    const authId = owner.authId;
 
-//update post
+    //GET HOUSE DATA
+    const posts = await Post.find({ authId: authId });
+    const filtered_posts = posts.map((item) => {
+      return {
+        title: item.title,
+        description: item.description,
+        postId: item._id,
+        pictureIndex: item.pictureIndex,
+      };
+    });
+    res.status(200).json(filtered_posts);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+//update post information
 router.put("/:id", async (req, res) => {
   //check if correct user's post is being updated
   if (req.body.authId === req.params.id || req.body.isAdmin) {

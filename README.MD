@@ -13,6 +13,8 @@ Of course this can be bypassed by someone who has the user's uid and then uses t
 
 This will contain basic user data. However it will also contain the authID of the user. This is the ID provided by Firebase. 
 
+However adding other users to the house, this will be handled by the user's database ID rather than their authId. This is to protect the authId from visiblity to users other than the user who the authId belongs to. 
+
 ## Posts and Houses
 
 The posts and houses will be their own collection. This is because because we often will not need to retrieve the houses or posts for a user and can simply get the user data instead.

@@ -145,4 +145,60 @@ router.delete("/:dbId", async (req, res) => {
   }
 });
 
+//get overview of house
+router.get("/houseOverview/:dbId", async (req, res) => {
+  try {
+    //GET OWNER DATA
+    const owner = await User.findById(req.params.dbId);
+    const authId = owner.authId;
+
+    //GET HOUSE DATA
+    const house = await House.findOne({ authId: authId });
+    let filtered_house = {};
+    let filtered_house_info = {};
+
+    //GET DATA ABOUT HOUSEMATES
+    let filtered_houseMates = [];
+
+    //get housemates only if house exists
+    if (house) {
+      const houseMates = await User.find({
+        _id: { $in: house.housemates },
+      });
+
+      //housemates
+      filtered_houseMates = houseMates.map((item) => {
+        return {
+          username: item.username,
+          phone: item.phone,
+          membership: item.membership,
+          dbId: item._id,
+        };
+      });
+
+      //house description
+      filtered_house["description"] = house.description;
+      filtered_house["address"] = house.address;
+      filtered_house["zipCode"] = house.zipCode;
+
+      //house information
+      let house_info = house.information;
+      house_info["_id"] = null;
+      filtered_house_info = house_info;
+    }
+
+    res.status(200).json({
+      owner: {
+        username: owner.username,
+        phone: owner.phone,
+      },
+      house: filtered_house,
+      housemates: filtered_houseMates,
+      information: filtered_house_info,
+    });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 module.exports = router;
