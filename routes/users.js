@@ -6,7 +6,6 @@ router.put("/:id", async (req, res) => {
   //check if correct user is being updated
   if (req.body.authId === req.params.id || req.body.isAdmin) {
     try {
-      console.log(req.body);
       //update all inputs inside req body
       await User.findOneAndUpdate(
         { authId: req.params.id },

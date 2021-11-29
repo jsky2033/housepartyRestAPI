@@ -37,6 +37,7 @@ router.get("/:id", async (req, res) => {
         address: house.address,
         zipCode: house.zipCode,
         information: house.information,
+        dbIdHouse: house._id,
       });
     } else {
       res.status(200).json(null);
