@@ -34,3 +34,5 @@ Automatic deployment of the rest api application through heroku is now guranteed
 # Important notes
 
 1. When using routes, the '/:id' ensures that everything after / is treated like the id. As such, if /:id is used along routes, it is best to have something like '/userOps/getAll' so that confusion is avoided with the id. See the users route for an example.
+2. We are making the assumption in the 'find by geocode' api that no two houses will have the same address which is a reasonable assumption given the scale of our application. 
+3. There really is no reason to map out the returned lists from MongoDB. As shown by the get all geocodes function, it is fully possible to omit fields using mongoose itself. 

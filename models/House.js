@@ -18,6 +18,17 @@ const InformationSchema = new mongoose.Schema({
   },
 });
 
+const GeoSchema = new mongoose.Schema({
+  lat: {
+    type: Number,
+    required: true,
+  },
+  lng: {
+    type: Number,
+    required: true,
+  },
+});
+
 const HouseSchema = new mongoose.Schema(
   {
     authId: {
@@ -42,6 +53,7 @@ const HouseSchema = new mongoose.Schema(
       default: [],
     },
     information: InformationSchema,
+    geoCode: GeoSchema
   },
   { timestamps: true }
 );

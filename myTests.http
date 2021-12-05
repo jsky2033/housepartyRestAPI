@@ -41,7 +41,11 @@ content-type: application/json
       "authId": "kCd8oHU8VIcdtzcCbg3ARydWeMl1",
       "description": "This is my first house",
       "address":"134 Palm Bay Road",
-      "zipCode": "32908"
+      "zipCode": "32908",
+      "geoCode":{
+            "lat": "29.651634",
+            "lng": "-82.324829"
+      }
 }
 
 ###
@@ -53,11 +57,11 @@ GET http://localhost:5000/api/houses/kCd8oHU8VIcdtzcCbg3ARydWeMl1 HTTP/1.1
 ###
 
 //update house
-PUT http://localhost:5000/api/houses/kCd8oHU8VIcdtzcCbg3ARydWeMl1 HTTP/1.1
+PUT http://localhost:5000/api/houses/f66sKE5aidWldUY0e7sCXElw0tH3 HTTP/1.1
 content-type: application/json
 
 {
-      "authId": "kCd8oHU8VIcdtzcCbg3ARydWeMl1",
+      "authId": "f66sKE5aidWldUY0e7sCXElw0tH3",
       "description": "This is my first house",
       "address":"133 Palm Bay Road",
       "zipCode": "32908",
@@ -104,6 +108,16 @@ content-type: application/json
 
 GET http://localhost:5000/api/houses/houseOverview/619bda48dbbc01cd49057793 HTTP/1.1
 
+
+###
+
+//get list of all geocodes
+GET http://localhost:5000/api/houses/geoCode/getAll HTTP/1.1
+
+###
+
+//get house by geocode
+GET http://localhost:5000/api/houses/geoCode/getByLoc?lat=29.64370199999999&lng=-82.329889 HTTP/1.1
 
 ###
 

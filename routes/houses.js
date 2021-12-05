@@ -12,6 +12,7 @@ router.post("/:id", async (req, res) => {
         description: req.body.description,
         address: req.body.address,
         zipCode: req.body.zipCode,
+        geoCode: req.body.geoCode,
       });
 
       const house = await newHouse.save();
@@ -37,6 +38,7 @@ router.get("/:id", async (req, res) => {
         address: house.address,
         zipCode: house.zipCode,
         information: house.information,
+        geoCode: house.geoCode,
         dbIdHouse: house._id,
       });
     } else {
@@ -146,7 +148,7 @@ router.delete("/:dbId", async (req, res) => {
   }
 });
 
-//get overview of house
+//get overview of house from non-user
 router.get("/houseOverview/:dbId", async (req, res) => {
   try {
     //GET OWNER DATA
@@ -164,7 +166,7 @@ router.get("/houseOverview/:dbId", async (req, res) => {
     //get housemates only if house exists
     if (house) {
       const houseMates = await User.find({
-        _id: { $in: house.housemates },
+        _id: { $in: house.housemates }, // this gets a list of User documents whose _id field matches anything inside house.housemates []
       });
 
       //housemates
@@ -183,9 +185,11 @@ router.get("/houseOverview/:dbId", async (req, res) => {
       filtered_house["zipCode"] = house.zipCode;
 
       //house information
-      let house_info = house.information;
-      house_info["_id"] = null;
-      filtered_house_info = house_info;
+      if (house.information) {
+        let house_info = house.information;
+        house_info["_id"] = null;
+        filtered_house_info = house_info;
+      }
     }
 
     res.status(200).json({
@@ -197,6 +201,60 @@ router.get("/houseOverview/:dbId", async (req, res) => {
       housemates: filtered_houseMates,
       information: filtered_house_info,
     });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+// get a list of all house geoCodes
+router.get("/geoCode/getAll", async (req, res) => {
+  try {
+    const geoCodes = await House.find(
+      {},
+      {
+        geoCode: 1,
+        _id: 0,
+      }
+    );
+    res.status(200).json(geoCodes);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+// get a house based on geoCode
+router.get("/geoCode/getByLoc", async (req, res) => {
+  try {
+    const searchCode = {
+      "geoCode.lat": parseFloat(req.query.lat),
+      "geoCode.lng": parseFloat(req.query.lng),
+    };
+    //get house if it exists
+    const house = await House.findOne(searchCode, {
+      description: 1,
+      address: 1,
+      zipCode: 1,
+      geoCode: 1,
+      housemates: 1,
+      authId: 1,
+    });
+    const new_id = house.authId;
+    //get owner of the house (their dbId is required for the frontend)
+    const owner = await User.findOne({ authId: new_id });
+    if (house) {
+      res.status(200).json({
+        house: {
+          description: house.description,
+          address: house.address,
+          zipCode: house.zipCode,
+          geoCode: house.geoCode,
+          housemates: house.housemates,
+          dbId: owner._id,
+        },
+      });
+    } else {
+      res.status(200).json(null);
+    }
   } catch (err) {
     res.status(500).json(err.message);
   }
