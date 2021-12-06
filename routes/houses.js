@@ -12,6 +12,7 @@ router.post("/:id", async (req, res) => {
         description: req.body.description,
         address: req.body.address,
         zipCode: req.body.zipCode,
+        rent: req.body.rent,
         geoCode: req.body.geoCode,
       });
 
@@ -39,6 +40,7 @@ router.get("/:id", async (req, res) => {
         zipCode: house.zipCode,
         information: house.information,
         geoCode: house.geoCode,
+        rent: house.rent,
         dbIdHouse: house._id,
       });
     } else {
@@ -183,6 +185,7 @@ router.get("/houseOverview/:dbId", async (req, res) => {
       filtered_house["description"] = house.description;
       filtered_house["address"] = house.address;
       filtered_house["zipCode"] = house.zipCode;
+      filtered_house["rent"] = house.rent;
 
       //house information
       if (house.information) {
@@ -200,6 +203,7 @@ router.get("/houseOverview/:dbId", async (req, res) => {
       house: filtered_house,
       housemates: filtered_houseMates,
       information: filtered_house_info,
+      dbIdHouse: house._id,
     });
   } catch (err) {
     res.status(500).json(err.message);
@@ -249,6 +253,7 @@ router.get("/geoCode/getByLoc", async (req, res) => {
           zipCode: house.zipCode,
           geoCode: house.geoCode,
           housemates: house.housemates,
+          rent: house.rent,
           dbId: owner._id,
         },
       });

@@ -1,6 +1,5 @@
 # Database Structure
 
-
 # Reason for double check on 
 
 Note the reason for having the comparison check of the user id in the URL and in the request body is for security.

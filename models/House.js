@@ -40,6 +40,10 @@ const HouseSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    rent: {
+      type: String,
+      required: true,
+    },
     address: {
       type: String,
       required: true,
